@@ -1,0 +1,30 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const port = 3000;
+
+app.use(bodyParser.json());
+
+// Define an array to store tasks (you can replace this with a database later).
+let tasks = [];
+
+// API routes
+"app.get('/tasks', (req, res) => {"
+  res.json(tasks);
+});
+
+"app.post('/tasks', (req, res) => {"
+  const task = req.body;
+  tasks.push(task);
+  res.status(201).json(task);
+});
+
+"app.delete('/tasks/:id', (req, res) => {"
+  const taskId = req.params.id;
+  tasks = tasks.filter(task => task.id !== taskId);
+  res.sendStatus(204);
+});
+
+"app.listen(port, () => {"
+  console.log(`Server is running on port ${port}`);
+});
